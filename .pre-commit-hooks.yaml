@@ -1,8 +1,8 @@
 - id: sbt-scalafmt
-  name: run scalafmt formatter
+  name: Sbt scalafmt formatter
   stages: [commit]
   language: python
-  entry: sbt checks
+  entry: sbt-scalafmt
   always_run: true
   require_serial: true
   pass_filenames: false
