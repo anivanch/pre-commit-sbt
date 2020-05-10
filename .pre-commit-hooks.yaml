@@ -1,0 +1,9 @@
+- id: sbt-scalafmt
+  name: run scalafmt formatter
+  stages: [commit]
+  language: python
+  entry: sbt checks
+  always_run: true
+  require_serial: true
+  pass_filenames: false
+  minimum_pre_commit_version: '1.13.0'
