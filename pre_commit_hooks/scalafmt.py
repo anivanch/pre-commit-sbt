@@ -1,5 +1,4 @@
 import os
-import sys
 import asyncio
 import logging
 from sbt_client import SbtClient, SbtError
@@ -15,9 +14,9 @@ async def _main() -> int:
         await client.execute("scalafmtCheck")
         await client.execute("scalafmt")
     except SbtError as error:
-        print(error, file=sys.stderr)
-        return 0
-    return 1
+        print(error)
+        return 1
+    return 0
 
 
 def main() -> int:
