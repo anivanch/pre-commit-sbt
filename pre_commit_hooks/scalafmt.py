@@ -10,7 +10,7 @@ async def _main() -> int:
     working_directory = os.getcwd()
     client = SbtClient(working_directory)
     await client.connect()
-    check_result = await client.execute_many("clean", "scalafmtCheck")
+    check_result = await client.execute_many(["clean", "scalafmtCheck"])
     print_execution_result(check_result)
     if SbtMessageLevel.ERROR in check_result:
         return 1
