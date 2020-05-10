@@ -1,7 +1,7 @@
 import asyncio
 from sbt_client import (
     SbtMessageLevel,
-    colored_result,
+    iterate_messages,
 )
 from .common import create_client
 
@@ -10,9 +10,9 @@ async def _main() -> int:
     client = create_client()
     await client.connect()
     result = await client.execute("scalastyle")
-    for message in colored_result(result):
-        print(message)
-    if SbtMessageLevel.ERROR in result:
+    if SbtMessageLevel.ERROR in result.levels:
+        for message in iterate_messages(result):
+            print(message)
         return 1
     return 0
 
