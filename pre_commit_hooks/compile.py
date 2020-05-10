@@ -9,15 +9,10 @@ from .common import create_client
 async def _main() -> int:
     client = create_client()
     await client.connect()
-    check_result = await client.execute("scalafmtCheck")
-    for message in colored_result(check_result):
+    result = await client.execute_many(["clean", "compile", "test:compile"])
+    for message in colored_result(result):
         print(message)
-    if SbtMessageLevel.ERROR in check_result:
-        return 1
-    fmt_result = await client.execute("scalafmt")
-    for message in colored_result(fmt_result):
-        print(message)
-    if SbtMessageLevel.ERROR in fmt_result:
+    if SbtMessageLevel.ERROR in result:
         return 1
     return 0
 

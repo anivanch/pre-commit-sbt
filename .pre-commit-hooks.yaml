@@ -1,8 +1,35 @@
+- id: sbt-compile
+  name: sbt-compile
+  stages: [commit]
+  language: python
+  entry: sbt-compile
+  always_run: true
+  require_serial: true
+  pass_filenames: false
+  minimum_pre_commit_version: '1.13.0'
 - id: sbt-scalafmt
-  name: Sbt scalafmt formatter
+  name: sbt-scalafmt
   stages: [commit]
   language: python
   entry: sbt-scalafmt
+  always_run: true
+  require_serial: true
+  pass_filenames: false
+  minimum_pre_commit_version: '1.13.0'
+- id: sbt-scalastyle
+  name: sbt-scalastyle
+  stages: [commit]
+  language: python
+  entry: sbt-scalastyle
+  always_run: true
+  require_serial: true
+  pass_filenames: false
+  minimum_pre_commit_version: '1.13.0'
+- id: sbt-scapegoat
+  name: sbt-scapegoat
+  stages: [commit]
+  language: python
+  entry: sbt-scapegoat
   always_run: true
   require_serial: true
   pass_filenames: false
