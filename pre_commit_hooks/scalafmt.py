@@ -1,7 +1,8 @@
 import os
 import asyncio
 import logging
-from sbt_client import SbtClient, SbtError
+from sbt_client import SbtClient, SbtMessageLevel
+from pre_commit_hooks.util import print_execution_result
 
 
 async def _main() -> int:
@@ -9,12 +10,13 @@ async def _main() -> int:
     working_directory = os.getcwd()
     client = SbtClient(working_directory)
     await client.connect()
-    try:
-        await client.execute("clean")
-        await client.execute("scalafmtCheck")
-        await client.execute("scalafmt")
-    except SbtError as error:
-        print(error)
+    check_result = await client.execute_many("clean", "scalafmtCheck")
+    print_execution_result(check_result)
+    if SbtMessageLevel.ERROR in check_result:
+        return 1
+    fmt_result = await client.execute("scalafmt")
+    print_execution_result(fmt_result)
+    if SbtMessageLevel.ERROR in fmt_result:
         return 1
     return 0
 
