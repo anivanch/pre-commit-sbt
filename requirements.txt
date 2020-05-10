@@ -1,1 +1,2 @@
 git+https://github.com/anivanch/sbt-client-py.git
+colorama==0.4.3
