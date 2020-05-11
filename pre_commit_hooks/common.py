@@ -28,8 +28,8 @@ def require_plugins(required_plugins: t.List[str]) -> bool:
 def _require_plugin(required_plugin: str, installed_plugins: str) -> bool:
     if required_plugin not in installed_plugins:
         print(
-            f"No {required_plugin} plugin found in {PLUGIN_DIR},"
-            "please make sure it is installed."
+            f"Plugin '{required_plugin}' not found in {PLUGIN_DIR}, "
+            "please make sure it is installed and try again."
         )
         return False
     return True
