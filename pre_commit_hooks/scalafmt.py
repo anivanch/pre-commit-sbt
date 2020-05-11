@@ -3,10 +3,15 @@ from sbt_client import (
     SbtMessageLevel,
     iterate_messages,
 )
-from .common import create_client
+from .common import (
+    create_client,
+    require_plugin,
+)
 
 
 async def _main() -> int:
+    if not require_plugin("sbt-scalafmt"):
+        return 1
     client = create_client()
     await client.connect()
     check_result = await client.execute("scalafmtCheck")
